@@ -66,79 +66,48 @@ Let’s build something groundbreaking—together
 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 
-Phoenix Sec - "O Antivírus que Seu PC Merece (Mas Não Sabia que Precisava)"
-Criado por PeterSteve234
-"Sim, é open-source. Não, não vou vender seus dados pra comprar café."
+Phoenix Sec – Um Antivírus Open Source Avançado
+Desenvolvido por: PeterSteve234
+Licença: LGPLv3 | Projeto aberto a contribuições
 
-Licença: GPLv3
-Aceita Contribuições
+Visão Geral
+O Phoenix Sec é uma solução de segurança gratuita e de código aberto, desenvolvida com foco em eficiência, privacidade e inovação. Criado inicialmente como um projeto independente, seu objetivo é oferecer uma alternativa moderna e transparente aos antivírus tradicionais.
 
-"Por Que Isso é Melhor Que o Seu Antivírus Atual?"
-(Ou: "Como um Estagiário Decidiu Consertar o Que Ninguém Tinha Coragem")
+Recursos Principais
+1. Verificação por Assinatura e Análise Comportamental
+O Phoenix Sec combina análise por hash SHA-256 com monitoramento comportamental para detectar ameaças que escapam das bases de assinaturas tradicionais. Arquivos que demonstram comportamento malicioso são automaticamente neutralizados.
 
-🔍 SHA-256 + Análise Comportamental
-Porque confiar só em assinaturas é como caçar vírus com uma rede furada.
+2. Inteligência Artificial para Redução de Falsos Positivos
+O sistema utiliza redes neurais com TensorFlow para investigar arquivos suspeitos, buscando identificar se o comportamento anômalo representa uma real ameaça ou apenas uma aplicação legítima mal projetada.
 
-Se um arquivo age como um ex-namorado ciumento (mexe em tudo, esconde coisas), ele é neutralizado.
+3. Sandbox Avançado
+Aplicações potencialmente perigosas são executadas em um ambiente virtual isolado baseado em KVM/Libvirt, permitindo a análise segura sem comprometer o sistema principal.
 
- IA que Não Só Chuta
-Falsos positivos? A IA do Phoenix Sec investiga o arquivo suspeito como um detetive:
+4. Backup em Tempo Real e Rollback Inteligente
+Caso um ataque seja bem-sucedido, o sistema possui mecanismos de recuperação instantânea, restaurando o estado dos arquivos antes da infecção.
 
-"Quem é você? Quem te criou? Por que tá se escondendo na pasta Temp?"
+5. Modo Offline com Isolamento Temporário
+O Phoenix Sec oferece um modo de isolamento temporário para proteção máxima contra ameaças persistentes e espionagem avançada, mesmo sem conexão com a internet.
 
-Se for legítimo, ganha um selo "Não sou vírus, só inútil mesmo".
+Tecnologias Utilizadas
+Python – Utilizado para prototipagem rápida e scripts auxiliares.
 
- Barreira Fake™ (Sandbox que Não é de Brincadeira)
-Roda apps suspeitos numa prisão de alta segurança virtual.
+Rust – Aplicado nos módulos que exigem alta performance e segurança de memória.
 
-"Quer executar aquele .exe duvidoso? Beleza, mas vai ser numa realidade paralela."
+TensorFlow – Utilizado no motor de IA para análise preditiva de arquivos.
 
- Backup em Tempo Real + Rollback Inteligente
-Se um vírus infectar seu PC, o Phoenix Sec volta no tempo como um DeLorean digital.
+KVM/Libvirt – Utilizado na implementação de ambientes virtuais para execução segura de binários suspeitos.
 
-"Lembra quando seus arquivos estavam saudáveis? Pois é, agora eles voltaram."
+Como Contribuir
+Acesse o repositório no GitHub e marque o projeto com uma estrela.
 
- Modo Offline: O Ninja da Segurança
-Ativa uma bolha de isolamento que só abre por milissegundos.
+Escolha uma issue marcada como iniciante ou que esteja sinalizada como "preciso de ajuda".
 
-"Spyware patrocinado por governos? Nem o Edward Snowden vaza isso."
+Faça um fork, implemente a solução e envie um pull request.
 
- Tecnologias Usadas
-Python (porque até estagiário consegue chorar em Python).
+Todas as contribuições serão reconhecidas no README oficial do projeto.
 
-Rust (pra quando a performance importa mais que a sanidade mental).
+Considerações Finais do Autor
+O Phoenix Sec foi desenvolvido com o objetivo de suprir deficiências notadas em muitas soluções comerciais. Trata-se de um projeto sério, com base técnica sólida e potencial de crescimento com a contribuição da comunidade.
 
-TensorFlow (IA treinada com ódio de falso positivo).
-
-KVM/Libvirt (virtualização que faz o Hyper-V chorar no canto).
-
- "Preciso de Ajuda!" – PeterSteve234
-"Sou um estagiário que usa ferramentas inteligentes pra não escrever código horroroso. Se você é um dev experiente e quer:
-
-Ensinar um novato (eu).
-
-Caçar bugs como se fossem Pokémon.
-
-Implementar features malucas (tipo um módulo em Assembly, porque por que não?).
-
-...eu te dou um  (cookie virtual) e créditos eternos no README!"
-
-(Obs.: Cookies podem ou não ser reais. Contribuidores sérios ganham café virtual.)
-
-📥 Como Contribuir
-Dê uma estrela  no repositório.
-
-Escolha uma issue boa pra iniciantes ou preciso de ajuda.
-
-Mande um PR e seja feliz.
-
-📜 Licença
-GPLv3 - Traduzindo: "Use, modifique, mas não seja babaca e compartilhe de volta."
-
- Últimas Palavras do Autor
-"Se o Windows Defender é um guarda-costas bêbado, o Phoenix Sec é o John Wick dos antivírus.
-...Mas ainda preciso de ajuda pra não fazer código espaguete. "
-
- Vem pro Projeto
-
-P.S.: Aceito doações em café, memes ou tutoriais de Rust. ☕
+Nota: O projeto está em fase ativa de desenvolvimento. Desenvolvedores experientes que desejem colaborar com revisões de código, caça de bugs ou implementação de novos recursos são bem-vindos.
