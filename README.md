@@ -1,5 +1,5 @@
 Languages used in this read.md: English - Portuguese(Brazil) 05/06/2025
-Phoenix Sec - Next-Generation Antivirus Framework
+OctadactlySecure - Next-Generation Antivirus Framework
 Created by PeterSteve234
 License: GPLv3
 
