@@ -72,6 +72,27 @@ void scan_and_generate(const char *base_path, FileIDGenerator *gen) {
     }
     closedir(dir);
 }
+
+
+// Um arquivo para armazenar caminhos de arquivos que já receberam ID
+#define HISTORICO_ARQUIVOS "historico_ids.txt"
+int ja_processado(const char *path) {
+    FILE *file = fopen(HISTORICO_ARQUIVOS, "r");
+    if (!file) return 0;
+
+    char linha[1024];
+    while (fgets(linha, sizeof(linha), file)) {
+        linha[strcspn(linha, "\n")] = 0; // remove \n
+        if (strcmp(linha, path) == 0) {
+            fclose(file);
+            return 1; // já existe
+        }
+    }
+
+    fclose(file);
+    return 0;
+}
+
 // Salva o estado do gerador em um arquivo (para persistência)
 void save_generator_state(FileIDGenerator *gen, const char *path) {
     FILE *file = fopen(path, "wb");
