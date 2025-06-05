@@ -113,7 +113,7 @@ TensorFlow (IA treinada com ódio de falso positivo).
 KVM/Libvirt (virtualização que faz o Hyper-V chorar no canto).
 
  "Preciso de Ajuda!" – PeterSteve234
-"Sou um estagiário que usa IA pra não escrever código horroroso. Se você é um dev experiente e quer:
+"Sou um estagiário que usa ferramentas inteligentes pra não escrever código horroroso. Se você é um dev experiente e quer:
 
 Ensinar um novato (eu).
 
