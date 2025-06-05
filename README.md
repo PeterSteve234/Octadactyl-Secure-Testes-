@@ -66,7 +66,7 @@ Let’s build something groundbreaking—together
 🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
 
 
-Phoenix Sec – Um Antivírus Open Source Avançado
+OctadactylSecure – Um Antivírus Open Source Avançado
 Desenvolvido por: PeterSteve234
 Licença: LGPLv3 | Projeto aberto a contribuições
 
