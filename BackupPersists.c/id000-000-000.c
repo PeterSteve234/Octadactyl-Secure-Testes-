@@ -46,6 +46,11 @@ int is_system_folder(const char *path) {
     return strstr(path, "Windows") || strstr(path, "Program Files");
 }
 
+void init_file_id_generator(FileIDGenerator *gen, char initial_prefix) {
+    gen->prefix = initial_prefix;
+    gen->counter = 0;
+}
+
 void scan_and_generate(const char *base_path, FileIDGenerator *gen) {
     DIR *dir = opendir(base_path);
     if (!dir) return;
@@ -114,21 +119,8 @@ void load_generator_state(FileIDGenerator *gen, const char *path) {
         gen->counter = 0;
     }
 }
-#include "file_naming.c" 
 
-int main() {
-    FileIDGenerator gen;
-    init_file_id_generator(&gen, 'a');
 
-    char id[MAX_ID_LEN];
-
-    for (int i = 0; i < 5; i++) {
-        generate_file_id(&gen, id);
-        printf("ID gerado: %s\n", id);
-    }
-
-    return 0;
-}
 
 int main(void)
 {
