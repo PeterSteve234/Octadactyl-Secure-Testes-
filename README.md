@@ -1,7 +1,7 @@
 Languages used in this README.md: English - Portuguese(Brazil) 05/06/2025
 OctadactlySecure - Next-Generation Antivirus Framework
 Created by PeterSteve234
-License: GPLv2
+License: GPLv3
 
 Overview
 Phoenix Sec is an advanced open-source antivirus engine designed to overcome the limitations of traditional security solutions. By combining SHA-256 hashing, behavioral analysis, AI-driven reputation checks, and real-time rollback, it provides a robust defense against modern malware while minimizing false positives.
