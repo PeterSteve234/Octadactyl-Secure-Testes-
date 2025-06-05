@@ -81,29 +81,29 @@ Porque confiar só em assinaturas é como caçar vírus com uma rede furada.
 
 Se um arquivo age como um ex-namorado ciumento (mexe em tudo, esconde coisas), ele é neutralizado.
 
-🤖 IA que Não Só Chuta
+ IA que Não Só Chuta
 Falsos positivos? A IA do Phoenix Sec investiga o arquivo suspeito como um detetive:
 
 "Quem é você? Quem te criou? Por que tá se escondendo na pasta Temp?"
 
 Se for legítimo, ganha um selo "Não sou vírus, só inútil mesmo".
 
-🏝️ Barreira Fake™ (Sandbox que Não é de Brincadeira)
+ Barreira Fake™ (Sandbox que Não é de Brincadeira)
 Roda apps suspeitos numa prisão de alta segurança virtual.
 
 "Quer executar aquele .exe duvidoso? Beleza, mas vai ser numa realidade paralela."
 
-⏳ Backup em Tempo Real + Rollback Inteligente
+ Backup em Tempo Real + Rollback Inteligente
 Se um vírus infectar seu PC, o Phoenix Sec volta no tempo como um DeLorean digital.
 
 "Lembra quando seus arquivos estavam saudáveis? Pois é, agora eles voltaram."
 
-🔒 Modo Offline: O Ninja da Segurança
+ Modo Offline: O Ninja da Segurança
 Ativa uma bolha de isolamento que só abre por milissegundos.
 
 "Spyware patrocinado por governos? Nem o Edward Snowden vaza isso."
 
-🛠️ Tecnologias Usadas
+ Tecnologias Usadas
 Python (porque até estagiário consegue chorar em Python).
 
 Rust (pra quando a performance importa mais que a sanidade mental).
@@ -112,7 +112,7 @@ TensorFlow (IA treinada com ódio de falso positivo).
 
 KVM/Libvirt (virtualização que faz o Hyper-V chorar no canto).
 
-🤝 "Preciso de Ajuda!" – PeterSteve234
+ "Preciso de Ajuda!" – PeterSteve234
 "Sou um estagiário que usa IA pra não escrever código horroroso. Se você é um dev experiente e quer:
 
 Ensinar um novato (eu).
@@ -121,12 +121,12 @@ Caçar bugs como se fossem Pokémon.
 
 Implementar features malucas (tipo um módulo em Assembly, porque por que não?).
 
-...eu te dou um 🍪 (cookie virtual) e créditos eternos no README!"
+...eu te dou um  (cookie virtual) e créditos eternos no README!"
 
 (Obs.: Cookies podem ou não ser reais. Contribuidores sérios ganham café virtual.)
 
 📥 Como Contribuir
-Dê uma estrela ⭐ no repositório (aumenta meu ego e o ranking do projeto).
+Dê uma estrela  no repositório.
 
 Escolha uma issue boa pra iniciantes ou preciso de ajuda.
 
@@ -135,10 +135,10 @@ Mande um PR e seja feliz.
 📜 Licença
 GPLv3 - Traduzindo: "Use, modifique, mas não seja babaca e compartilhe de volta."
 
-🎤 Últimas Palavras do Autor
+ Últimas Palavras do Autor
 "Se o Windows Defender é um guarda-costas bêbado, o Phoenix Sec é o John Wick dos antivírus.
-...Mas ainda preciso de ajuda pra não fazer código espaguete. 🍝"
+...Mas ainda preciso de ajuda pra não fazer código espaguete. "
 
-👉 Vem pro Projeto
+ Vem pro Projeto
 
 P.S.: Aceito doações em café, memes ou tutoriais de Rust. ☕
