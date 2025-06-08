@@ -1,19 +1,4 @@
-/*
- * Este arquivo é parte do [OctadactylSecure].
- *
- * Este programa é software livre: você pode redistribuí-lo e/ou modificar
- * sob os termos da GNU Lesser General Public License conforme publicada pela
- * Free Software Foundation, seja a versão 3 da Licença, ou
- * (a seu critério) qualquer versão posterior.
- *
- * Este programa é distribuído na esperança de que seja útil,
- * mas SEM QUALQUER GARANTIA; sem mesmo a garantia implícita de
- * COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM PROPÓSITO PARTICULAR. Veja o
- * GNU Lesser General Public License para mais detalhes.
- *
- * Você deve ter recebido uma cópia da GNU Lesser General Public License
- * junto com este programa. Caso contrário, consulte <https://www.gnu.org/licenses/>.
- */
+
 
 #include <stdio.h>
 #include <stdlib.h>
