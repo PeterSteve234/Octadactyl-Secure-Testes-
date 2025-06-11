@@ -11,18 +11,17 @@
  // Número arbitrário para identificação do socket Netlink
 #define NETLINK_USER 31         
 
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Peter Steve");
-MODULE_DESCRIPTION("LSM + Netlink Antivirus Control");
-
-static struct sock *nl_sk = NULL;
+MODULE_LICENSE("GPL");          // Licença GPL (obrigatória para módulos do kernel)
+MODULE_AUTHOR("Peter Steve");   // Autor do módulo
+MODULE_DESCRIPTION("LSM + Netlink Antivirus Control");  // Descrição
+static struct sock *nl_sk = NULL;  // Socket Netlink
 
 struct trusted_process {
-    const char*name;
+    const char* name;  // Nome do processo confiável
 };
 
-static struct trusted_process trusted_list[] ={
-  {"systemd"},
+static struct trusted_process trusted_list[] = {
+    {"systemd"},        // Processos considerados confiáveis
     {"bash"},
     {"sshd"},
     {"init"},
@@ -35,16 +34,16 @@ static struct trusted_process trusted_list[] ={
     {"kworker/0:0"},
 };
 
-#define TRUSTED_LIST_SIZE (sizeof(trusted_list)/sizeof(trusted_list[0]))
+#define TRUSTED_LIST_SIZE (sizeof(trusted_list)/sizeof(trusted_list[0]))  // Tamanho da lista
 
 static int is_process_trusted(const char *proc_name) {
     int i;
     for (i = 0; i < TRUSTED_LIST_SIZE; i++) {
         if (strcmp(proc_name, trusted_list[i].name) == 0) {
-            return 1;
+            return 1;  // Processo encontrado na lista de confiáveis
         }
     }
-    return 0;
+    return 0;  // Processo NÃO está na lista
 }
 
 
