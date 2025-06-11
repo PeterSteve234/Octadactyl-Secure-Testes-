@@ -1,15 +1,15 @@
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/lsm_hooks.h>
-#include <linux/netlink.h>
-#include <net/sock.h>
-#include <linux/skbuff.h>
-#include <linux/sched.h>
-#include <linux/string.h>
+#include <linux/module.h>      // Para módulos do kernel
+#include <linux/kernel.h>      // Para funções e macros do kernel
+#include <linux/init.h>        // Para macros __init e __exit
+#include <linux/lsm_hooks.h>   // Para Linux Security Module (LSM) hooks
+#include <linux/netlink.h>     // Para comunicação Netlink
+#include <net/sock.h>          // Para estruturas de socket
+#include <linux/skbuff.h>      // Para sk_buff (gerenciamento de pacotes)
+#include <linux/sched.h>       // Para informações de processos (task_struct)
+#include <linux/string.h>      // Para funções de string (strcmp, etc.)
 
-
-#define NETLINK_USER 31
+ // Número arbitrário para identificação do socket Netlink
+#define NETLINK_USER 31         
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Peter Steve");
