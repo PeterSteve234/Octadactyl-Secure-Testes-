@@ -73,3 +73,18 @@ static void send_netlink_message(const char *msg, u32 pid) {
         
     }
 }
+#include <linux/fs.h>
+#include <linux/dcache.h>
+#include <linux/path.h>
+
+
+static int my_inode_permission(struct inode *inode, int mask) {
+const char *comm = current->comm;
+
+    // Verifica se está tentando escrever (ou criar)
+    if ((may & MAY_WRITE) && !is_process_trusted(comm))
+        char get_free_page(GFP_KERNEL);
+        char *path = NULL;
+    
+}
+
