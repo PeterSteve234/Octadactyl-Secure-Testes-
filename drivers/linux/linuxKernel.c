@@ -87,54 +87,64 @@ const char *comm = current->comm;
     
 }
 
-/* 
-char *buf = (char *)__get_free_page(GFP_KERNEL);
-        char *path = NULL;
+static int my_lsm_function(...)  // Substitua pelos parâmetros corretos
+{
+    char *buf = (char *)__get_free_page(GFP_KERNEL);
+    char *path = NULL;
 
-        if (!buf)
-            return 0;  // não bloqueia se falhar
+    if (!buf)
+        return 0;  // não bloqueia se falhar
 
-        path = dentry_path_raw(current->fs->pwd.dentry, buf, PAGE_SIZE);
+    path = dentry_path_raw(current->fs->pwd.dentry, buf, PAGE_SIZE);
 
-        if (!IS_ERR(path)) {
-            char msg[256];
-            snprintf(msg, sizeof(msg), "[Antivirus LSM] Processo %s tentou modificar: %s", comm, path);
-            send_netlink_message(msg, 0);  // pid = 0 (broadcast)
-            pr_info("%s\n", msg);
-        }
-
-        free_page((unsigned long)buf);
+    if (!IS_ERR(path)) {
+        char msg[256];
+        snprintf(msg, sizeof(msg), "[Antivirus LSM] Processo %s tentou modificar: %s", comm, path);
+        send_netlink_message(msg, 0);  // pid = 0 (broadcast)
+        pr_info("%s\n", msg);
     }
+
+    free_page((unsigned long)buf);
 
     return 0; // permitir por enquanto
 }
 static struct security_hook_list my_hooks[] = {
     LSM_HOOK_INIT(inode_permission, my_inode_permission),
+    // Adicione outros hooks conforme necessário
 };
 
+
 static int __init my_lsm_init(void) {
-    struct netlink_kernel_cfg cfg = {
-        .input = NULL,  // sem handler por enquanto
-    };
+struct netlink_kernel_cfg cfg = {
+    .input = NULL,
+} 
+nl_sk = netlink_kernel_create(&init_net, NETLINK_USER, &cfg);
+   if(!nl_skj) {
+    pr_err("Netlink Kernel create failed\n ");
+    return -ENOMEM;  // Falha ao criar socket Netlink
+   }
 
-    nl_sk = netlink_kernel_create(&init_net, NETLINK_USER, &cfg);
-    if (!nl_sk) {
-        pr_err("Netlink kernel creation failed\n");
-        return -ENOMEM;
-    }
 
-    security_add_hooks(my_hooks, ARRAY_SIZE(my_hooks), "my_antivirus_lsm");
+   security_add_hooks(my_hooks, ARRAY_SIZE(my_hooks), "my_antivirus_lsm");
 
-    pr_info("LSM + Netlink Antivirus loaded\n");
-    return 0;
-}
+   pr_info("LSM + Netlink Antivirus Control module Loaded\n");
+   return 0;  // Sucesso
+}  
 
-static void __exit my_lsm_exit(void) {
-    if (nl_sk)
-        netlink_kernel_release(nl_sk);
-    pr_info("LSM + Netlink Antivirus unloaded\n");
-}
 
-module_init(my_lsm_init);
-module_exit(my_lsm_exit);
-*/
+
+     static void __exit my_lsm_exit(void) {
+        if (nl_sk) 
+             netlink_kernel_release(nl_sk);
+             pr_info("LSM + Netlink Antivirus Control module UnLoded\n");
+     }
+
+     module_init(my_lsm_init);  // Função de inicialização do módulo
+     module_exit(my_lsm_exit);  // Função de limpeza do módulo
+
+MODULE_VERSION("1.0");  // Versão do módulo
+MODULE_ALIAS("antivirus_lsm");  // Alias para o módulo
+MODULE_INFO(vermagic, "1.0");  // Informações de versão do módulo
+MODULE_INFO(name, "LSM + Netlink Antivirus Control");  // Nome do módulo
+MODULE_INFO(srcversion, "1.0");  // Versão do código-fonte
+MODULE_INFO(depends, "");  // Dependências do módulo    
