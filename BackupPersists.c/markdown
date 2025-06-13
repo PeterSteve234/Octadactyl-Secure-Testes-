@@ -1,0 +1,23 @@
+## 🧠 Comandos e Funções Usadas no Projeto
+
+| Comando/Função           | Quantas vezes | O que faz                                                                 |
+|--------------------------|---------------|---------------------------------------------------------------------------|
+| `#include`               | 5             | Importa bibliotecas necessárias para usar funções externas.               |
+| `FILE *fopen()`          | 5             | Abre arquivos para leitura ou escrita.                                   |
+| `perror()`               | 3             | Mostra mensagem de erro no terminal.                                     |
+| `exit(1)`                | 6             | Encerra o programa com erro.                                             |
+| `SHA256_CTX`             | 2             | Estrutura usada pelo OpenSSL para calcular hash.                         |
+| `SHA256_Init()`          | 1             | Inicia o processo de cálculo SHA-256.                                    |
+| `SHA256_Update()`        | 1             | Atualiza o hash com dados lidos do arquivo.                              |
+| `SHA256_Final()`         | 1             | Finaliza e retorna o hash SHA-256.                                       |
+| `fread()`                | 3             | Lê dados binários de um arquivo.                                         |
+| `fwrite()`               | 3             | Escreve dados binários em um arquivo.                                    |
+| `malloc()` / `free()`    | 1 cada        | Aloca e libera memória na RAM.                                           |
+| `snprintf()`             | 3             | Escreve string formatada com segurança em um buffer.                     |
+| `mkdir()`                | 2             | Cria diretórios (`.backup`, `hashes`).                                   |
+| `sleep()`                | 1             | Pausa a execução por X segundos (monitoramento).                         |
+| `while (1)`              | 1             | Loop infinito para monitorar alterações constantemente.                  |
+| `if ()`                  | 20+           | Condicional: executa código apenas se condição for verdadeira.           |
+| `for`                    | 1             | Laço para comparar cada byte dos hashes.                                 |
+| `return`                 | Várias        | Retorna valores de funções.                                              |
+| `printf()`               | Várias        | Imprime informações no terminal.                                         |
