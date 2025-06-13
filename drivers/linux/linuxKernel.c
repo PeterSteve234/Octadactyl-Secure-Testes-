@@ -93,7 +93,7 @@ static int my_inode_permission(struct inode *inode, int mask) {
 
         if (!IS_ERR(path)) {
             char msg[256];
-            snprintf(msg, sizeof(msg), "[Antivirus LSM] Processo %s tentou escrever em: %s", comm, path);
+            snprintf(msg, sizeof(msg), "ACTION:MODIFY|PROC:%s|PATH:%s", comm, path);
             send_netlink_message(msg, 0);  // Envia para espaço do usuário (PID 0 = broadcast)
             pr_info("%s\n", msg);  // Log no kernel
         }
@@ -160,6 +160,20 @@ static void __exit my_lsm_exit(void) {
         netlink_kernel_release(nl_sk);  // Libera socket Netlink
     }
     pr_info("[LSM Antivirus] Módulo descarregado\n");
+}
+
+#define RATE_LIMIT_SECONDS 5
+static unsigned long netlinkMessageLink(void) {
+    static time_t last_time = 0;
+    time_t current_time = time(NULL);
+    if(last_time == 0 || (current_time - last_time) >= RATE_LIMIT_SECONDS);
+
+    last_time = current_time;
+    // permite ação
+    return 1;
+} else {
+    //tempo maximo indefinido
+    return 0;
 }
 
 module_init(my_lsm_init);  // Macro de inicialização
