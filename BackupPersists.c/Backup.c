@@ -3,30 +3,39 @@
 #include <stdlib.h>
 #include <direct.h> // Para _mkdir no Windows
 #include <windows.h> // Para verificar atributos de arquivos
-// Caminho padrão para backup
-#define CAMINHO_PADRAO "C:\\MeusBackups
-#define TAM_MAX_CAMINHO 260
+#include <openssl/sha.h>
 
-void criarDiretorioSeNaoExistir(const char *caminho) {
-    if (_access(caminho, 0)) { // Verifica se o diretório não existe
-        if (_mkdir(caminho)) { // Tenta criar o diretório
-            perror("Erro ao criar diretorio %s\n", caminho);
+void  calcularHashArquivo(const char *path, unsigned char *outputhash) {
+    FILE *file = fopen(path, "rb");
+    if (!file) {
+        perror("Erro ao abrir arquivo do Hash!");
             exit(1);
-        }
     }
 }
-int main () {
-  char resposta[10];
- char caminhoBackup[TAM_MAX_CAMINHO];
-  char caminhoOrigem[TAM_MAX_CAMINHO];
-  printf("Deseja fazer o Backup dos arquivos? (s/n):");
-  // Lê a resposta do usuário
-     fgets(resposta, sizeof(resposta), stdin);
-           resposta[strcspn(resposta, "\n")] = 0;
-      if (strcmp(resposta, "s") == 0 || strcmp(resposta, "S") == 0) {
-        printf("Digite o caminho de origem onde quer
-        salvar o backup (PRESSIONE ENTER para usar '%s'):\n " , CAMINHO_PADRAO);
-        fgets(caminhoOrigem, sizeof(caminhoOrigem), stdin);
-        caminhoBackup[strcspn(caminhoOrgiem, "\n")] = '\0';
-        } 
-      }
+
+
+SHA256_CTX sha256;
+SHA256_init(&sha256);
+
+
+    const int bufsize = 32768;
+    unsigned char *buffer = malloc(bufSize);
+        if(!buffer) {
+            perror("falha ao alocar buffer\n");
+            fclose(file);
+            exit(1);
+        }
+
+
+while((bytesread  = fread(buffer, 1, bufsize, file) > 0) {
+SHA256_Final(&sha256, buffer, bytesRead);
+
+    
+    SHA256_Final(outpushHash, &sha256);
+
+    fclose(file);
+    free(buffer);
+}
+
+
+     
