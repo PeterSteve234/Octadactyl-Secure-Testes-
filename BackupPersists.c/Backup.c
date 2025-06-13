@@ -38,4 +38,13 @@ SHA256_Final(&sha256, buffer, bytesRead);
 }
 
 
+
+
+void fazerBackupArquivo(const char *origem, const char *destino) {
+FILE *src = fopen(origem, "wb");
+FILE *dst = fopen(destino, "wb");
+}
+if (!src || !dst) {
+perror("Erro ao abrir arquivo para backup⚠")
+}
      
