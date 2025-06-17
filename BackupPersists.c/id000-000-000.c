@@ -202,6 +202,24 @@ void save_generator_state(FileIDGenerator *gen, const char *path) {
         fclose(file);
     }
 }
+void validatorState(FileIDGenerator *gen, uint64_t previous_counter, char previousPrefix) {
+   if (gen->counter == previous_counter + 1) {
+       printf("o contador foi gerado com sucesso!"){
+           if (gen-> == previousPrefix){
+               printf("o prefixo foi mantido com sucesso!\n")
+
+           } else if (gen->prefix == previousPrefix + 1 && gen->counter == 1){
+               printf("O prefixo foi incrementado corretamente", gen->counter);
+           } else {
+               printf("O prefixo não foi incrementado corretamente!\n", previousPrefix, gen->prefix);
+           }
+       } else {
+           printf("❌ Falha na geração de ID. Contador incorreto (esperado: %llu , obtido: %llu\n)",
+           previous_counter +1, gen->counter);
+       }
+      
+   }
+}
 
 // Carrega o estado do gerador
 void load_generator_state(FileIDGenerator *gen, const char *path) {
@@ -213,5 +231,6 @@ void load_generator_state(FileIDGenerator *gen, const char *path) {
         // Estado inicial (a-000-...-000)
         gen->prefix = 'a';
         gen->counter = 0;
+        counter++
     }
 }
