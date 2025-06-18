@@ -175,7 +175,23 @@ static unsigned long netlinkMessageLink(void) {
     //tempo maximo indefinido
     return 0;
 }
+static  int my_bprm_check_security(struct linux_binprm *bprm){
+    const char *proc_name = current->comm;  // Nome do processo atual
 
+    if(!is_process_trusted(proc_name)){
+        char msg[256];
+        snprintf(msg, sizeof(msg), "ACTION:EXEC|PROC:%Security", proc_name, msg, bprm->filename);
+        send_netlink_message(msg, 0);  // Envia para espaço do usuário (PID 0 = broadcast)
+        pr_info("%s\n", msg);  // Log no kernel
+        return -EACESS
+    }
+    return 0;  // Permite se for um processo confiável
+}
+return 1; // recusa a permissão 
+#define LSM_HOOK_INIT(bprm_check_security, my_bprm_check_security),
+// Macro para registrar o hook de verificação de segurança do binário
+
+RESE_SECURITY_HOOK(bprm_check_security, my_bprm_check_security);  // Registra o hook de verificação de segurança do binário
 module_init(my_lsm_init);  // Macro de inicialização
 module_exit(my_lsm_exit);  // Macro de finalização
 
