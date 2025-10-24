@@ -43,8 +43,25 @@ SHA256_Final(&sha256, buffer, bytesRead);
 void fazerBackupArquivo(const char *origem, const char *destino) {
 FILE *src = fopen(origem, "wb");
 FILE *dst = fopen(destino, "wb");
+    
+    origem = printf("digite a pasta/arquivo para Backup!");
+    destino = printf("digite a pasta para destino!");
+    
 }
 if (!src || !dst) {
-perror("Erro ao abrir arquivo para backup⚠")
-}
+  perror("Erro ao abrir arquivo para backup⚠")
+} else {
+    
+    printf("Arquivo foi aberto com sucesso");
+    file = fopen(origem, src, "r");
+    file = fopen(destino, dst, "r");
+    
+  }  if (origem == NULL) {
+    
+        printf("Não foi possível abrir o arquivo");
+    
+    }   exit(EXIT_FAILURE);
+
+
      
+
