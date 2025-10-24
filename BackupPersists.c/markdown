@@ -1,23 +1,240 @@
-## 🧠 Comandos e Funções Usadas no Projeto
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <thread>
+#include <chrono>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <csignal>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <grp.h>
+#include <fcntl.h>
+#include <dirent.h>
+#include <sys/mman.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <openssl/sha.h>
 
-| Comando/Função           | Quantas vezes | O que faz                                                                 |
-|--------------------------|---------------|---------------------------------------------------------------------------|
-| `#include`               | 5             | Importa bibliotecas necessárias para usar funções externas.               |
-| `FILE *fopen()`          | 5             | Abre arquivos para leitura ou escrita.                                   |
-| `perror()`               | 3             | Mostra mensagem de erro no terminal.                                     |
-| `exit(1)`                | 6             | Encerra o programa com erro.                                             |
-| `SHA256_CTX`             | 2             | Estrutura usada pelo OpenSSL para calcular hash.                         |
-| `SHA256_Init()`          | 1             | Inicia o processo de cálculo SHA-256.                                    |
-| `SHA256_Update()`        | 1             | Atualiza o hash com dados lidos do arquivo.                              |
-| `SHA256_Final()`         | 1             | Finaliza e retorna o hash SHA-256.                                       |
-| `fread()`                | 3             | Lê dados binários de um arquivo.                                         |
-| `fwrite()`               | 3             | Escreve dados binários em um arquivo.                                    |
-| `malloc()` / `free()`    | 1 cada        | Aloca e libera memória na RAM.                                           |
-| `snprintf()`             | 3             | Escreve string formatada com segurança em um buffer.                     |
-| `mkdir()`                | 2             | Cria diretórios (`.backup`, `hashes`).                                   |
-| `sleep()`                | 1             | Pausa a execução por X segundos (monitoramento).                         |
-| `while (1)`              | 1             | Loop infinito para monitorar alterações constantemente.                  |
-| `if ()`                  | 20+           | Condicional: executa código apenas se condição for verdadeira.           |
-| `for`                    | 1             | Laço para comparar cada byte dos hashes.                                 |
-| `return`                 | Várias        | Retorna valores de funções.                                              |
-| `printf()`               | Várias        | Imprime informações no terminal.                                         |
+namespace fs = std::filesystem;
+🗂️ Gerenciamento de Arquivos
+cpp
+Copiar código
+std::rename("antigo.txt", "novo.txt");                          // Renomear arquivo
+std::remove("arquivo.txt");                                      // Apagar arquivo
+fs::exists("caminho");                                           // Verificar se existe
+fs::file_size("arquivo.txt");                                    // Tamanho do arquivo (bytes)
+fs::permissions("arquivo.txt", fs::perms::owner_all);            // Alterar permissões
+fs::last_write_time("arquivo.txt");                              // Última modificação
+fs::copy("origem", "destino", fs::copy_options::recursive);      // Copiar pasta
+
+open("arquivo.bin", O_CREAT | O_WRONLY, 0644);                   // Abrir arquivo POSIX
+chmod("arquivo.txt", 0600);                                      // Mudar permissões (Unix)
+chown("arquivo.txt", 1000, 1000);                                // Mudar dono e grupo
+stat("arquivo.txt", &st);                                        // Obter metadados
+utime("arquivo.txt", nullptr);                                   // Atualizar timestamps
+⚙️ Processos e Threads
+cpp
+Copiar código
+std::this_thread::sleep_for(std::chrono::seconds(2));            // Pausar thread
+std::thread t(funcao);                                           // Criar thread
+t.join();                                                        // Esperar thread
+
+pthread_create(&tid, nullptr, minhaFuncao, nullptr);             // Criar thread POSIX
+pthread_cancel(tid);                                             // Cancelar thread
+pthread_kill(tid, SIGTERM);                                      // Enviar sinal a thread
+pthread_detach(tid);                                             // Desvincular thread
+
+pid_t pid = fork();                                              // Criar processo
+execl("/bin/ls", "ls", "-l", NULL);                              // Executar programa
+kill(pid, SIGKILL);                                              // Matar processo
+getpid();                                                        // ID do processo atual
+getppid();                                                       // ID do processo pai
+getuid();                                                        // ID do usuário
+setuid(0);                                                       // Tornar-se root
+🌐 Rede e Sockets
+cpp
+Copiar código
+socket(AF_INET, SOCK_STREAM, 0);                                 // Criar socket TCP
+bind(sockfd, (sockaddr*)&addr, sizeof(addr));                    // Associar endereço
+listen(sockfd, 5);                                               // Modo servidor
+accept(sockfd, nullptr, nullptr);                                // Aceitar conexão
+connect(sockfd, (sockaddr*)&addr, sizeof(addr));                 // Conectar ao servidor
+send(sockfd, buffer, len, 0);                                    // Enviar dados
+recv(sockfd, buffer, len, 0);                                    // Receber dados
+shutdown(sockfd, SHUT_RDWR);                                     // Encerrar conexão
+close(sockfd);                                                   // Fechar socket
+
+inet_addr("127.0.0.1");                                          // IP → binário
+inet_ntoa(in_addr);                                              // Binário → string
+gethostname(host, sizeof(host));                                 // Nome do host
+gethostbyname("www.site.com");                                   // Resolver DNS
+💾 Memória e Mapeamento
+cpp
+Copiar código
+malloc(1024);                                                    // Alocar memória heap
+calloc(1, 1024);                                                 // Alocar zerada
+realloc(ptr, 2048);                                              // Redimensionar memória
+free(ptr);                                                       // Liberar memória
+
+memset(buffer, 0, 1024);                                         // Zerar memória
+memcpy(dest, src, 1024);                                         // Copiar memória
+memcmp(buf1, buf2, 1024);                                        // Comparar memória
+
+mmap(nullptr, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);  // Mapear arquivo
+munmap(ptr, 4096);                                               // Desmapear
+mlock(ptr, 4096);                                                // Travar na RAM
+munlock(ptr, 4096);                                              // Destravar
+🔐 Segurança e Criptografia
+cpp
+Copiar código
+SHA256_CTX ctx;                                                  // Contexto SHA256
+SHA256_Init(&ctx);                                               // Iniciar hash
+SHA256_Update(&ctx, dados, tamanho);                             // Atualizar hash
+SHA256_Final(resultado, &ctx);                                   // Finalizar hash
+
+umask(0077);                                                     // Máscara de criação
+setgid(0);                                                       // Mudar grupo
+seteuid(0);                                                      // Mudar usuário efetivo
+getgrnam("root");                                                // Grupo pelo nome
+getpwnam("usuario");                                             // Usuário pelo nome
+crypt("senha", "sal");                                           // Hash de senha
+getpass("Senha: ");                                              // Ler senha oculta
+🚨 Sinais e Monitoramento
+cpp
+Copiar código
+signal(SIGINT, handler);                                         // Tratar Ctrl+C
+signal(SIGTERM, handler);                                        // Tratar encerramento
+sigaction(SIGSEGV, &act, nullptr);                               // Tratar segfault
+alarm(5);                                                        // Alarme de 5s
+pause();                                                         // Esperar sinal
+sleep(10);                                                       // Pausar processo
+gettimeofday(&tv, nullptr);                                      // Tempo atual
+clock_gettime(CLOCK_REALTIME, &ts);                              // Tempo em nanossegundos
+📁 Diretórios
+cpp
+Copiar código
+mkdir("nova_pasta", 0755);                                       // Criar pasta
+rmdir("pasta");                                                  // Remover pasta
+opendir("pasta");                                                // Abrir pasta
+readdir(dp);                                                     // Ler entradas
+closedir(dp);                                                    // Fechar pasta
+💬 Fluxo de Entrada/Saída
+cpp
+Copiar código
+std::cin.getline(buffer, 256);                                   // Ler linha
+std::cout << "texto\n";                                          // Escrever
+scanf("%d", &num);                                               // Ler inteiro
+printf("valor: %d\n", num);                                      // Mostrar valor
+fflush(stdout);                                                  // Forçar saída
+🧩 Controle de Threads (pthread)
+cpp
+Copiar código
+pthread_create();             // Cria nova thread
+pthread_exit();               // Encerra thread atual
+pthread_join();               // Espera thread terminar
+pthread_detach();             // Libera recursos automaticamente
+pthread_self();               // Retorna ID da thread atual
+pthread_equal();              // Compara IDs
+pthread_cancel();             // Solicita cancelamento
+pthread_setcancelstate();     // Define se cancelamento é habilitado
+pthread_setcanceltype();      // Define tipo de cancelamento
+pthread_testcancel();         // Testa cancelamento pendente
+🔒 Mutexes
+cpp
+Copiar código
+pthread_mutex_init();         // Inicializa mutex
+pthread_mutex_destroy();      // Destroi mutex
+pthread_mutex_lock();         // Bloqueia mutex
+pthread_mutex_trylock();      // Tenta bloquear
+pthread_mutex_unlock();       // Desbloqueia mutex
+🔁 Variáveis de Condição
+cpp
+Copiar código
+pthread_cond_init();          // Inicializa variável
+pthread_cond_destroy();       // Destroi variável
+pthread_cond_wait();          // Espera sinal
+pthread_cond_timedwait();     // Espera até limite
+pthread_cond_signal();        // Acorda uma thread
+pthread_cond_broadcast();     // Acorda todas
+🚦 Semáforos
+cpp
+Copiar código
+sem_init();                   // Inicializa semáforo
+sem_destroy();                // Destroi semáforo
+sem_wait();                   // Decrementa semáforo (bloqueia)
+sem_trywait();                // Tenta sem bloquear
+sem_post();                   // Incrementa (libera recurso)
+sem_getvalue();               // Lê valor atual
+⏱️ Controle de Tempo
+cpp
+Copiar código
+time();                       // Tempo atual (segundos desde Epoch)
+gettimeofday();               // Tempo em microssegundos
+clock_gettime();              // Tempo de relógios específicos
+clock_settime();              // Define tempo
+sleep();                      // Pausa (segundos)
+usleep();                     // Pausa (microssegundos)
+nanosleep();                  // Pausa (nanosegundos)
+alarm();                      // Alarme de segundos
+setitimer();                  // Temporizador periódico
+getitimer();                  // Obtém temporizador
+👤 Usuários e Permissões
+cpp
+Copiar código
+getuid();                     // ID do usuário
+geteuid();                    // ID efetivo
+getgid();                     // ID do grupo
+getegid();                    // ID efetivo do grupo
+setuid();                     // Define usuário
+seteuid();                    // Define usuário efetivo
+setgid();                     // Define grupo
+setegid();                    // Define grupo efetivo
+chmod();                      // Altera permissões
+fchmod();                     // Altera via descritor
+chown();                      // Altera dono
+fchown();                     // Altera dono via descritor
+umask();                      // Define máscara padrão
+🖥️ Entrada/Saída de Terminal
+cpp
+Copiar código
+isatty();                     // Verifica se é terminal
+ttyname();                    // Nome do terminal
+tcgetattr();                  // Atributos do terminal
+tcsetattr();                  // Define atributos
+cfmakeraw();                  // Modo bruto
+cfsetispeed();                // Velocidade de entrada
+cfsetospeed();                // Velocidade de saída
+tcflush();                    // Limpa buffers
+tcsendbreak();                // Envia break
+tcdrain();                    // Espera saída
+🧠 Mapeamento e Paginação
+cpp
+Copiar código
+mlockall();                   // Bloquear todas as páginas
+munlockall();                 // Desbloquear todas
+madvise();                    // Dicas de uso ao kernel
+mincore();                    // Verifica páginas em RAM
+getpagesize();                // Tamanho da página
+posix_fadvise();              // Dicas de uso de arquivo
+posix_fallocate();            // Reserva espaço no disco
+🔑 Criptografia e Segurança (baixo nível)
+cpp
+Copiar código
+getrandom();                  // Bytes aleatórios seguros
+arc4random();                 // Aleatórios criptográficos
+RAND_bytes();                 // (OpenSSL) Bytes seguros
+SHA256_Init();                // Inicia contexto SHA256
+SHA256_Update();              // Atualiza hash
+SHA256_Final();               // Finaliza hash
+HMAC();                       // Hash HMAC
+EVP_EncryptInit();            // Inicia criptografia simétrica
+EVP_EncryptUpdate();          // Criptografa blocos
+EVP_EncryptFinal();           // Finaliza criptografia
+EVP_DecryptInit();            // Inicia descriptografia
+EVP_DecryptUpdate();          // Descriptografa blocos
+EVP_DecryptFinal();           // Finaliza descriptografia
